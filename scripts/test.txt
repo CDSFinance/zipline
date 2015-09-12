@@ -1,2 +1,0 @@
-this is a test.
-i am on mukund's ec2 cluster
