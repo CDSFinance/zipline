@@ -3,7 +3,7 @@ from zipline.api import order, symbol
 # Put any initialization logic here.  The context object will be passed to
 # the other methods in your algorithm.
 def initialize(context):
-    pass
+    context.stocks = symbols('aapl')
 
 # Will be called on every trade event for the securities you specify. 
 def handle_data(context, data):
