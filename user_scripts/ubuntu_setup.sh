@@ -1,6 +1,8 @@
 # This scripts sets up a new Amazon server with CDSFinance Tools Installed
 # Ubuntu Server 14.04 LTS (HVM), SSD Volume Type
 
+cd ~
+
 # Update apt-get
 sudo apt-get update
 
