@@ -24,8 +24,12 @@ sudo pip install zipline
 sudo apt-get install -y ipython
 sudo apt-get install -y ipython-notebook
 
+# install matplotlib
+sudo apt-get install -y python-matplotlib
+
 # Generate iPython profiles
 ipython profile create nbserver
+
 
 # create certificates
 cd ~
