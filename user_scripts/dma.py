@@ -11,6 +11,7 @@ def initialize(context):
 
 
 def handle_data(context, data):
+    print context.portfolio.portfolio_value
     # Skip first 300 days to get full windows
     context.i += 1
     if context.i < 300:
@@ -36,3 +37,4 @@ def handle_data(context, data):
     record(AAPL=data[sym].price,
            short_mavg=short_mavg[sym],
            long_mavg=long_mavg[sym])
+
