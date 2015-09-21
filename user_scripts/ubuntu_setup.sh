@@ -27,6 +27,17 @@ sudo apt-get install -y ipython-notebook
 # install matplotlib
 sudo apt-get install -y python-matplotlib
 
+# install theano and dependencies
+sudo apt-get install python-scipy python-nose g++ libopenblas-dev
+sudo pip install Theano
+sudo apt-get install build-essential python-setuptools libatlas-dev libatlas3gf-base
+git clone https://github.com/scikit-learn/scikit-learn.git
+
+cd sci-kit
+python setup.py build
+sudo python setup.py install
+cd ~
+
 # Generate iPython profiles
 ipython profile create nbserver
 
@@ -41,7 +52,6 @@ openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout mycert.pem -out myce
 
 # modify nbserver profile
 cd ~/.ipython/profile_nbserver
-nano ipython_notebook_config.py
 echo "c.IPKernelApp.pylab = 'inline'" >> ipython_notebook_config.py
 echo "c.NotebookApp.certfile = u'/home/ubuntu/certificates/mycert.pem'" >> ipython_notebook_config.py
 echo "c.NotebookApp.ip = '*'" >> ipython_notebook_config.py

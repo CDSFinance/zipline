@@ -38,6 +38,8 @@ def initialize(context):
 
 def handle_data(context, data):
     # Skip first 300 days to get full windows
+
+    # print context.portfolio.portfolio_value
     context.i += 1
     if context.i < 300:
         return
@@ -112,7 +114,7 @@ if __name__ == '__main__':
     from zipline.utils.factory import load_from_yahoo
 
     # Set the simulation start and end dates.
-    start = datetime(2011, 1, 1, 0, 0, 0, 0, pytz.utc)
+    start = datetime(2008, 1, 1, 0, 0, 0, 0, pytz.utc)
     end = datetime(2013, 1, 1, 0, 0, 0, 0, pytz.utc)
 
     # Load price data from yahoo.
