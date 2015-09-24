@@ -1,6 +1,5 @@
 """ Vanilla RNN
 Parallelizes scan over sequences by using mini-batches.
-lmao
 @author Graham Taylor
 """
 import numpy as np
@@ -21,29 +20,26 @@ plt.ion()
 mode = theano.Mode(linker='cvm')
 #mode = 'DEBUG_MODE'
 
-
+# Recurrent Neural Network
+# Supported output types:
+# real : linear output units, uses mean-squared error
+# binary : binary output units, uses cross-entropy error
+# softmax : single softmax out, uses cross-entropy error
+# @param
 class RNN(object):
-    """    Recurrent neural network class
-
-    Supported output types:
-    real : linear output units, use mean-squared error
-    binary : binary output units, use cross-entropy error
-    softmax : single softmax out, use cross-entropy error
-
-    """
+    
     def __init__(self, input, n_in, n_hidden, n_out, activation=T.tanh,
-                 output_type='real'):
+              output_type='real'):
 
         self.input = input
         self.activation = activation
         self.output_type = output_type
-
         self.batch_size = T.iscalar()
 
         # theta is a vector of all trainable parameters
         # it represents the value of W, W_in, W_out, h0, bh, by
-        theta_shape = n_hidden ** 2 + n_in * n_hidden + n_hidden * n_out + \
-                      n_hidden + n_hidden + n_out
+        theta_shape = (n_hidden**2 + n_in*n_hidden + n_hidden*n_out + n_hidden
+                        + n_hidden + n_out)
         self.theta = theano.shared(value=np.zeros(theta_shape,
                                                   dtype=theano.config.floatX))
 
@@ -936,9 +932,9 @@ def test_softmax(n_epochs=250, optimizer='cg'):
 
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
-    t0 = time.time()
-    test_real(n_epochs=1000)
-    #test_binary(optimizer='sgd', n_epochs=1000)
-    #test_softmax(n_epochs=250, optimizer='sgd')
-    print "Elapsed time: %f" % (time.time() - t0)
+  logging.basicConfig(level=logging.INFO)
+  t0 = time.time()
+  test_real(n_epochs=1000)
+  #test_binary(optimizer='sgd', n_epochs=1000)
+  #test_softmax(n_epochs=250, optimizer='sgd')
+  print "Elapsed time: %f" % (time.time() - t0)
