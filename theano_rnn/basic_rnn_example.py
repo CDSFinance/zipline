@@ -40,11 +40,15 @@ def step(u_t, h_tm1, W, W_in, W_out):
                         sequences=u,
                         outputs_info=[h0, None],
                         non_sequences=[W, W_in, W_out])
+
 # error between output and target
 error = ((y - t) ** 2).sum()
 print(error)
+print(t)
+
 # gradients on the weights using BPTT
 gW, gW_in, gW_out = TT.grad(error, [W, W_in, W_out])
+
 # training function, that computes the error and updates the weights using
 # SGD.
 fn = theano.function([h0, u, t, lr],
