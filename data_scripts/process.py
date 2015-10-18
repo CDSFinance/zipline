@@ -18,11 +18,16 @@ def getStartDate():
     d = "0" + d
   return y + "-" + m + "-" + d
 
+def mean(col):
+  c = [float(i) for i in col]
+  return sum(c)/float(len(c))
+
 s3 = boto3.resource('s3')
 # s3.meta.client.download_file('cdsquantfinance', 'AAPL.csv', '/Users/marvin/zipline/data_scripts/AAPL.csv')
 
 bucket = s3.Bucket(bucket_name)
 exists = True
+
 
 try:
   s3.meta.client.head_bucket(Bucket=bucket_name)
@@ -38,11 +43,15 @@ for obj in bucket.objects.limit(count = 1):
     start_day += 1
   
   startIndex = data.find(getStartDate())
-  data =  data[startIndex:]
+  data = data[startIndex:]
   f = StringIO.StringIO(data)
   reader = csv.reader(f, delimiter=',')
-  for row in reader:
-    print '\t'.join(row)
+  readerT = [list(i) for i in zip(*reader)]
+  readerT = readerT[1:]
+
+  for col in readerT:
+    print mean(col)
+    # print '\t'.join(col)
     
   
 
